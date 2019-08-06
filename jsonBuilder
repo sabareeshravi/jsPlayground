@@ -1,0 +1,92 @@
+//Creating Cookie Data
+var answersCookieData = 'adtAnswers={"1":"a1","2":"a2","3":"a3","somekey":"a4"}';
+document.cookie = answersCookieData;
+var questionsCookieData = 'adtQuestions={"1":"q1","2":"q2","3":"q3","4":"q4"}';
+document.cookie = questionsCookieData;
+
+
+//JS - Get Cookie Data
+var answersOnJS = JSON.parse(getCookie("adtAnswers"));
+var questionsOnJS = JSON.parse(getCookie("adtQuestions"));
+
+
+//Creating JSON Object
+var jsonObj = {
+  title: "No one has more ways to keep you safe",
+  html: {
+    upper:
+    {
+      left: '',
+      center: '',
+      right: '',
+    },
+    icons:{},
+  },
+}
+
+//Business Logic
+if(questionsOnJS[1] == "q1" && answersOnJS[1] == "a1"){
+  jsonObj.html.upper.left = "You love your tech";
+}
+if(questionsOnJS[2] == "q2" && answersOnJS[2] == "a2"){
+  jsonObj.html.upper.center = "What's more precious than family";
+}
+if(questionsOnJS[3] == "q3" && answersOnJS[3] == "a3"){
+  jsonObj.html.upper.right = "Peace of mind when you travel";
+}
+
+//Return this..
+console.log(buildHtml())
+
+//Function to get cookie data by cookie name
+function getCookie(name) {
+    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+}
+
+
+//Builds the html string
+function buildHtml(){
+  var html = "<html>"
+              +
+              "<head>"
+              +
+              "<title>"
+              +
+              "ADT Demo Page"
+              +
+              "</title>"
+              +
+              "</head>"
+              +
+              "<body>"
+              +
+              "<h2>"
+              +
+              jsonObj.title
+              +
+              "</h2>"
+              +
+              "<div align='left'>"
+              +
+              jsonObj.html.upper.left
+              +
+              "</div>"
+              +
+              "<div align='center'>"
+              +
+              jsonObj.html.upper.center
+              +
+              "</div>"
+              +
+              "<div align='right'>"
+              +
+              jsonObj.html.upper.right
+              +
+              "</div>"
+              +
+              "</body>"
+              +
+              "</html>";
+  return html;
+}
